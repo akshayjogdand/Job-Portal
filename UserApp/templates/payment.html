@@ -1,0 +1,65 @@
+{% extends "rlogin.html" %}
+{%block content%}
+
+<br><br><br>
+<section class="vh-100">
+{% if messages %}
+{% for message in messages %}
+<center> 
+<div class="alert alert-danger alert-dismissible fade in" role="alert">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span>
+    </button>
+    <center> <h4> <strong> {{message}}</strong>  </h4></center> 
+</div></center>
+{%endfor%}
+{%endif%}
+
+    <div class="container py-5 h-100" style=" width:500px;background-color:hsla(0, 29%, 82%, 0.505);" >
+        <div class="row d-flex align-items-center justify-content-center h-100">
+
+            <div class="card-body p-5 text-center"><br><br>
+                <h2 style="color:rgb(202, 9, 227);font-family: 'Times New Roman', Times, serif;" >  Proceed to Pay   </h2>
+
+            <form method="post" action="/payment">
+                {% csrf_token %}
+
+                <center>
+                    <div class="form-outline mb-4">
+                        <input type="text" class="form-control form-control-lg"
+                            placeholder="Card Number" style="width:350px;background-color:beige;" name="cardno"  required>
+                </center>
+            </div>
+            <br>
+            <center>
+                <div class="form-outline mb-4">
+                    <input type="text"  class="form-control form-control-lg"
+                        placeholder="CVV" style="width:350px;background-color:beige;"  name="cvv"  required />
+
+                </div><br>
+            </center>
+            <center>
+                <div class="form-outline mb-4">
+                    <input type="text" class="form-control form-control-lg"
+                        placeholder="Expiry (mm/yyyy)" style="width:350px;background-color:beige;" name="exp" required />
+
+                </div><br>
+            </center>
+            <center>
+                <div class="form-outline mb-4">
+                    <input type="text" class="form-control form-control-lg"
+                        placeholder="pay" style="width:350px;background-color:beige;" name="payment" value="{{x}}" readonly/>
+
+                </div><br>
+            </center>
+                
+            <center>
+                <button class="btn btn-primary btn-lg btn-block" type="submit" style="width:350px;"> Pay</button>
+            </form>
+                <br>
+
+        </div>
+
+    </div>
+    </div>
+</section><br>
+{%endblock%}

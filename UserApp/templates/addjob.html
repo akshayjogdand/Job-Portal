@@ -1,0 +1,84 @@
+{% extends "rlogin.html" %}
+{%block content%}
+
+{% if messages %}
+{% for message in messages %}
+
+<center> 
+    <div class="alert alert-danger alert-dismissible fade in" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span>
+        </button>
+        <center> <h4> <strong> {{message}}</strong>  </h4></center> 
+    </div></center>
+{%endfor%}
+{%endif%}
+<section class="vh-100" style="margin-top:40px">
+ 
+    <div class="container py-5 h-100" style=" width:500px;background-color:hsla(0, 6%, 3%, 0.505);">
+        <div class="row d-flex align-items-center justify-content-center h-100">
+
+            <div class="card-body p-5 text-center"><br>
+                <h2 style="color:rgb(28, 226, 229);font-family: 'Times New Roman', Times, serif;"><b>   Post New Job </b> </h2>
+                <br>
+        
+                <form method="post" >
+                    {% csrf_token %}
+
+                    <center>
+                        <div class="form-outline mb-4">
+                            <input type="text" class="form-control form-control-lg" placeholder="Job Title"
+                                style="width:350px;background-color:beige;color:rgb(239, 111, 20);" name="title"
+                                required>
+                    </center>
+            </div>
+            <br>
+
+            <center>
+                <div class="form-outline mb-4">
+                    <input type="text" class="form-control form-control-lg" placeholder="Experience Required"
+                        style="width:350px;background-color:beige;color:rgb(239, 111, 20);" name="experience" required />
+
+                </div><br>
+            </center>
+            <center>
+                <div class="form-outline mb-4">
+                    <input type="text" class="form-control form-control-lg" placeholder="Salary"
+                        style="width:350px;background-color:beige;color:rgb(239, 111, 20);" name="salary" />
+
+                </div><br>
+            </center>
+            <div class="form-outline mb-4">
+                <input type="text" class="form-control form-control-lg" placeholder="Education Required"
+                    style="width:350px;background-color:beige;margin-left:80px ;color:rgb(239, 111, 20);" name="education" required />
+            </div><br>
+            <center>
+                <div class="form-outline mb-4">
+                    <input type="text" class="form-control form-control-lg" placeholder="Key Skills required"
+                        style="width:350px;background-color:beige;color:rgb(239, 111, 20);" name="skills" required />
+
+                </div><br>
+            </center>
+            <center>
+                <div class="form-outline mb-4">
+                    <input type="number" class="form-control form-control-lg" placeholder="No of opening"
+                        style="width:350px;background-color:beige;color:rgb(239, 111, 20);" name="nof" required />
+
+                </div><br>
+            </center>
+            <center>
+                <div class="form-outline mb-4">
+                    <textarea name="description"  cols="60" rows="3" maxlength="500"  class="form-control form-control-lg" style="width:350px;background-color:beige;color:rgb(239, 111, 20);"
+                                        placeholder="Job Description" required></textarea>
+
+                </div><br>
+            </center>
+            <center>
+                <button class="btn btn-primary btn-lg btn-block" type="submit" style="width:350px;"> Add Job
+                </button></center>
+                </form>
+                <br>
+        </div>
+    </div>
+    </div>
+</section>
+{%endblock%}

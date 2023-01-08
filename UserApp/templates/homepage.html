@@ -1,0 +1,630 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title> Naukri </title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <style>
+    /* Remove the navbar's default margin-bottom and rounded borders */
+    .navbar {
+      margin-bottom: 50;
+      border-radius: 0;
+
+    }
+
+    footer {
+      background-color: rgb(241, 243, 245);
+      padding: 25px;
+    }
+
+    .carousel-inner img {
+      width: 34%;
+      /* Set width to 100% */
+      margin: 8px;
+      min-height: 30%;
+    }
+
+    /* Hide the carousel text when the screen is less than 600 pixels wide */
+    @media (max-width: 600px) {
+      .carousel-caption {
+        display: none;
+      }
+    }
+
+    input[type="text"] {
+
+      width: 500px;
+    }
+
+
+    input[type="text"],
+    input[type="number"],
+    input[type="email"],
+    input[type="file"],
+    input[type="password"],
+    input[type="date"] {
+      background-color: hwb(248 90% 7% / 0.963);
+    }
+
+    body {
+      background-color: rgb(225, 235, 235);
+
+    }
+
+    #one {
+      background-color: rgb(245, 245, 236)
+    }
+
+    .come-from-modal.left .modal-dialog,
+    .come-from-modal.right .modal-dialog {
+      position: fixed;
+      margin: auto;
+      width: 320px;
+      height: 100%;
+      -webkit-transform: translate3d(0%, 0, 0);
+      -ms-transform: translate3d(0%, 0, 0);
+      -o-transform: translate3d(0%, 0, 0);
+      transform: translate3d(0%, 0, 0);
+    }
+
+    .come-from-modal.left .modal-content,
+    .come-from-modal.right .modal-content {
+      height: 100%;
+      overflow-y: auto;
+      border-radius: 0px;
+    }
+
+    .come-from-modal.left .modal-body,
+    .come-from-modal.right .modal-body {
+      padding: 15px 15px 80px;
+    }
+
+    .come-from-modal.right.fade .modal-dialog {
+      right: -320px;
+      -webkit-transition: opacity 0.3s linear, right 0.3s ease-out;
+      -moz-transition: opacity 0.3s linear, right 0.3s ease-out;
+      -o-transition: opacity 0.3s linear, right 0.3s ease-out;
+      transition: opacity 0.3s linear, right 0.3s ease-out;
+    }
+
+    .come-from-modal.right.fade.in .modal-dialog {
+      right: 0;
+    }
+
+    ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .notification-drop {
+      font-family: 'Ubuntu', sans-serif;
+      color: #444;
+    }
+
+    .notification-drop .item {
+
+      position: relative;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .notification-drop .item:hover {
+      cursor: pointer;
+    }
+
+    .notification-drop .item i {
+      margin-left: 10px;
+    }
+
+    .notification-drop .item ul {
+      display: none;
+      position: absolute;
+      top: 100%;
+      background: rgb(245, 245, 236);
+      left: -250px;
+      right: 0px;
+      z-index: 1;
+      border-top: 1px solid #ddd;
+    }
+
+    .notification-drop .item ul li {
+      font-size: 16px;
+      padding: 9px;
+    }
+
+    .notification-drop .item ul li:hover {
+      background: #ddd;
+      color: rgba(0, 0, 0, 0.8);
+    }
+
+    @media screen and (min-width: 500px) {
+      .notification-drop {
+        display: flex;
+        justify-content: flex-end;
+      }
+
+      .notification-drop .item {
+        border: none;
+      }
+    }
+
+    .notification-bell {
+      font-size: 20px;
+    }
+
+    .btn__badge {
+      background: #FF5D5D;
+      color: white;
+      font-size: 12px;
+      position: absolute;
+      top: 0;
+      right: 0px;
+      padding: 3px 10px;
+      border-radius: 50%;
+    }
+  </style>
+
+  <script type="text/javascript">
+    $(document).ready(function () {
+      $(".notification-drop .item").on('click', function () {
+        $(this).find('ul').toggle();
+      });
+    });
+
+
+      $().alert();
+
+      setTimeout(function(){$('.alert').alert('close')}, 5000);
+
+
+    var title;
+    var loc;
+    var u;
+    function check() {
+      title = document.getElementById("title");
+      loc = document.getElementById("loc");
+
+      if (title.value.length == 0 && loc.value.length == 0) {
+        u = document.getElementById("add");
+        u.innerHTML = "Please Enter Atleast one value";
+        title.focus();
+        return;
+      }
+      else {
+        myfrm.action = "/searchJob"
+        myfrm.submit();
+      }
+
+      //myfrm.submit();
+    }
+    function remove() {
+      if (title.value.length != 0 || loc.value.length != 0) {
+        u.innerHTML = "";
+
+      }
+    }
+  </script>
+</head>
+
+<body>
+  
+
+
+
+  <nav class="navbar navbar-default">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+
+
+        <img src="{% static 'logo1.png'%}" alt="loading" height="80px" width="80px" class="img-circle">
+      </div>
+      <div class="collapse navbar-collapse" id="myNavbar">
+        <ul class="nav navbar-nav">
+          <br>
+          <li> &nbsp;&nbsp;&nbsp;&nbsp; </li>
+          <li class="active"><a href="/" style="color:black;font-size: large;"> Home </a></li>
+          <li> &nbsp;&nbsp;&nbsp;&nbsp; </li>
+          <li><a href="/aboutus" style="color:black;font-size: large;"> About </a></li>
+          <li> &nbsp;&nbsp;&nbsp;&nbsp; </li>
+          {%if "email" in request.session%}
+
+          <li class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#" style="color:black;font-size: large;">Jobs
+              <span class="caret"></span></a>
+            <ul class="dropdown-menu" style="background-color:hwb(248 90% 7% / 0.963);height:auto;">
+              {%for cat in cats%}
+              <li><a href="/jobcat/{{cat.id}}">{{cat.type}} </a></li>
+
+              {%endfor%}
+            </ul>
+          </li>
+
+
+
+          {%else%}
+          <li class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#" style="color:black;font-size: large;"> For
+              Employers
+
+              <span class="caret"></span></a>
+            <ul class="dropdown-menu" style="background-color:hwb(248 90% 7% / 0.963);height:70px;">
+              <li><a href="/RecruitLogin"> Login </a></li>
+
+              <li><a href="/RecruitSignup"> Sign Up </a></li>
+            </ul>
+          </li>
+          {%endif%}
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <br>
+          {%if "email" in request.session%}
+          <li>
+
+            <ul class="notification-drop">
+              <li class="item">
+                <span class="glyphicon glyphicon-bell" style="font-size:30px;margin-top:20px"> </span>
+                {%if value == 0%}
+                <span class="btn__badge pulse-button "> {{value}} </span>
+                <ul>
+                  <li>
+                    <h4>No notification found. </h4>
+                  </li>
+                </ul>
+                {%else%}
+
+                <span class="btn__badge pulse-button "> {{value}} </span>
+
+                <ul>
+                  {%for msg in msgdata%}
+                  <li> <b> <a href="/openmsg/{{msg.id}}"> {{msg.company.cname}} </a> </b> send message to you.</li>
+                  {%endfor%}
+
+
+                </ul>
+                {%endif%}
+              </li>
+            </ul>
+
+          </li>
+
+
+
+
+          <li> &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp;</li>
+
+
+          <li> <button style="border-radius: 20px;" class="btn btn-default" data-toggle="modal" data-target="#myModal">
+              <img src="{{user.image.url}}" class="img-circle" style="height: 40px; width: 40px;">
+              <span class="glyphicon" style="size:large">&#xe052;</span> </button> </li>
+          <div class="modal fade  come-from-modal right" id="myModal" tabindex="-1" role="dialog"
+            aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content" style="background-color: rgb(227, 235, 235);">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                      aria-hidden="true">&times;</span></button>
+                </div>
+                <div class="modal-body">
+                  <div class="card-body">
+                    <center>
+                      <img src="{{user.image.url}}" alt="loading" height="70px" width="70px" class="img-circle">
+                      <h4 style="font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif">
+                        <b style="font-size: 20px;"> {{user.uname}}</b>
+                      </h4><br>
+                      <span class="glyphicon" style="font-size: 15px;"> <b> &#x2709; {{user.email}} </b> </span>
+                      <br><br>
+                      <span class="glyphicon" style="font-size: 15px;"> <b> &#xe182; {{user.phone}} </b> </span><br><br>
+
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                        class="bi bi-person-workspace" viewBox="0 0 16 16">
+                        <path
+                          d="M4 16s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H4Zm4-5.95a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Z" />
+                        <path
+                          d="M2 1a2 2 0 0 0-2 2v9.5A1.5 1.5 0 0 0 1.5 14h.653a5.373 5.373 0 0 1 1.066-2H1V3a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v9h-2.219c.554.654.89 1.373 1.066 2h.653a1.5 1.5 0 0 0 1.5-1.5V3a2 2 0 0 0-2-2H2Z" />
+                      </svg> &nbsp;&nbsp; <b style="font-size: 15px;"> {{user.work_status}}</b><br>
+                    </center>
+
+                    <center><br>
+                      <p class="card-text"> <a href="/update" style="font-size: 15px;"> View & Update Profile </a></p>
+                      <br>
+                    </center>
+
+                  </div> <br>
+                  <span class="glyphicon" style="margin-left: 10px;">&#xe111;
+
+                  </span> <a href="/inbox" style="color:black;">
+                    <b>Inbox </b>
+
+
+                  </a><br><br>
+
+                  <a href="/history/{{user.id}}" style="color:black;margin-left: 10px;">
+                    <b>Applied Jobs </b></a><br><br>
+
+
+                  <span class="glyphicon" style="margin-left: 10px;">&#xe163;</span>
+                  <a href="/logout" style="border-radius:20px;color:black">
+                    <b> Logout </b>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+
+          {%else%}
+          <li>
+            <a href="" class="btn btn-default" style="color:blue;border-radius:20px ;" data-toggle="modal"
+              data-target="#myModal">
+              <b> Login </b> </a>
+            <div class="modal fade" id="myModal">
+              <div class="modal-dialog">
+                <div class="modal-content" id="one">
+                  <div class="modal-header">
+                    <h3 class="modal-title" align="center"
+                      style="color:rgb(228, 31, 152);font-family: 'Times New Roman', Times, serif;">
+                      <b> Login Here </b>
+                    </h3>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  </div>
+                  <div class="modal-body">
+                    <section class="vh-100">
+                      <div class="container-fluid h-custom">
+                        <div class="row d-flex justify-content-center align-items-center h-100">
+                          <div class="col-md-6 col-lg-6 col-xl-5">
+                            <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.webp"
+                              class="img-fluid" alt="Sample image" style="height:250px;width:250px">
+                          </div><br><br><br>
+                          <div class="col-md-6 col-lg-6 col-xl-4 offset-xl-1">
+                            <form method="post" action="/login">
+                              {% csrf_token %}
+                              <div
+                                class="d-flex flex-row align-items-center justify-content-center justify-content-lg-start">
+                                <div class="form-outline mb-4">
+                                  <input type="email" class="form-control form-control-lg"
+                                    placeholder="Enter a valid email address" name="email" style="width:250px"
+                                    required />
+                                </div>
+                                <br>
+                                <div class="form-outline mb-4">
+                                  <input type="password" class="form-control form-control-lg"
+                                    placeholder="Enter password" name="pwd" style="width:250px" required />
+                                </div>
+                                <br>
+                                <div class="d-flex justify-content-between align-items-center">
+
+                                  <a href="/forget" class="text-body" style="color:black">Forgot password?</a>
+                                </div><br>
+
+                                <div class="text-center text-lg-start mt-4 pt-2">
+                                  <button type="submit" class="btn btn-primary btn-lg"
+                                    style="padding-left: 2.5rem; padding-right: 2.5rem;">Login</button>
+                                  <p class="small fw-bold mt-2 pt-1 mb-0"> <br>Don't have an account? <a
+                                      href="/register" class="link-danger">Register</a></p>
+                                </div>
+                              </div>
+
+                            </form>
+                          </div>
+                        </div>
+                      </div>
+                    </section>
+
+                  </div>
+
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </li>
+          <li> &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; </li>
+          <li><a href="/register" class="btn btn-danger" style="border-radius:20px;;color:black">
+              <b>Register</b>
+            </a></li>
+        </ul>
+        {%endif%}
+
+      </div>
+    </div>
+
+  </nav>
+  {%block content%}
+  <div class="container">
+    {% if messages %}
+    {% for message in messages %}
+    <center>
+      <div class="alert alert-danger alert-dismissible fade in" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+            aria-hidden="true">&times;</span>
+        </button>
+        <center>
+          <h4> <strong> {{message}} </strong> </h4>
+        </center>
+      </div>
+    </center>
+    {%endfor%}
+    {%endif%}
+
+
+
+    <Center>
+      <h2 style="font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif"><b> Find Your Dream job Now</b>
+      </h2><br>
+      <div class="card" style=" height:auto;width: 800px; border-radius: 50px;border:3px rgb(235, 214, 214) solid ;">
+        <div class="card-body">
+          <form class="form-inline" method="post" name="myfrm">
+            {% csrf_token %}
+            <br>
+            <div class="form-group">
+              <input type="text" class="form-control" id="title" name="title1" placeholder="Enter designation"
+                style="width: 250px;border-radius: 20px;height: 40px;" onblur="remove()">
+            </div>&nbsp;&nbsp;&nbsp;
+            <div class="form-group">
+              <input type="text" class="form-control" id="loc" name="loc1" placeholder="Enter Location"
+                style="width: 250px;border-radius: 20px;height: 40px;" onblur="remove()">
+            </div> &nbsp;&nbsp;
+            <button type="button" class="btn btn-info" style="border-radius:20px;padding:10px; width: 80px;"
+              onclick="check()">
+              Search</button>
+            <br><br>
+
+          </form>
+        </div>
+      </div> <span id="add" style="color:red; font-family: Verdana, Geneva, Tahoma, sans-serif;"></span>
+    </center><br>
+    <h2 style="font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif" align="center"><b> Top companies
+        hiring now</b>
+    </h2><br>
+
+
+    <div id="myCarousel" class="carousel slide" data-ride="carousel">
+      <!-- Indicators -->
+      <ol class="carousel-indicators">
+        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+        <li data-target="#myCarousel" data-slide-to="1"></li>
+        <li data-target="#myCarousel" data-slide-to="2"></li>
+      </ol>
+      <!-- Wrapper for slides -->
+      <div class="carousel-inner" role="listbox">
+        <div class="item active">
+          <a href="/jobcat/8">
+            <div class="col-sm-1"
+              style="background-color:rgb(243, 237, 237);  height: 180px; width: 260px;margin-left: 20px;">
+              <H5 style="margin-top: 15px;" align="center"> <b> IT / Networking</b></H5><br>
+              {%for c in comp8%}
+              <img src="{{c.image1.url}}" alt="Image" style="margin: 2px; width:30%; height: 5%;">
+              {%endfor%}
+            </div>
+          </a>
+          <a href="/jobcat/1">
+            <div class="col-sm-1"
+              style="background-color:rgb(243, 237, 237); height:180px; width:260px;margin-left:20px; ">
+              <H5 Align="center" style="margin-top: 15px;"> <b> Healthcare / Hospitality</b></H5><br>
+              {%for c in comp1%}
+              <img src="{{c.image1.url}}" alt="Image" style="margin: 2px;width:30%;height: 5%;">
+              {%endfor%}
+            </div>
+          </a>
+          <a href="/jobcat/2">
+            <div class="col-sm-1 "
+              style="background-color:rgb(243, 237, 237); margin-left:20px; height:180px; width:260px;">
+              <H5 align="center" style="margin-top: 15px;"> <b> Banking / Accounting / Finance </b> </H5><br>
+              {%for c in comp2%}
+              <img src="{{c.image1.url}}" alt="Image" style="margin: 2px;width:30%;height: 5%;">
+              {%endfor%}
+            </div>
+          </a>
+          <a href="/jobcat/6">
+            <div class="col-sm-1 "
+              style="background-color:rgb(243, 237, 237);margin-left: 20px;height: 180px;width: 260px;">
+              <H5 style="margin-top: 15px;" align="center"> <b>Construction / Engineering</b></H5><br>
+              {%for c in comp6%}
+              <img src="{{c.image1.url}}" alt="Image" style="margin: 2px; width:30%; height: 5%;">
+              {%endfor%}
+            </div>
+          </a>
+        </div>
+        <div class="item">
+          <a href="/jobcat/4">
+            <div class="col-sm-1 "
+              style="background-color:rgb(243, 237, 237);margin-left: 20px;height: 180px;width: 260px;">
+              <H5 style="margin-top: 15px;" align="center"> <b> Education / Teaching</b></H5><br>
+              {%for c in comp4%}
+              <img src="{{c.image1.url}}" alt="Image" style="margin: 2px;width:30%;height: 5%;">
+              {%endfor%}
+            </div>
+          </a>
+          <a href="/jobcat/7">
+
+            <div class="col-sm-1 "
+              style="background-color:rgb(243, 237, 237);margin-left: 20px;height: 180px;width: 260px;">
+              <H5 style="margin-top: 15px;" align="center"> <b>Hospitality services / Restaurants</b></H5><br>
+              {%for c in comp7%}
+              <img src="{{c.image1.url}}" alt="Image" style="margin: 2px; width:30%; height: 5%;">
+              {%endfor%}
+            </div>
+          </a>
+          <a href="/jobcat/3">
+            <div class="col-sm-1 "
+              style="background-color:rgb(243, 237, 237);margin-left: 20px;height: 180px;width: 260px;">
+              <H5 style="margin-top: 15px;" align="center"> <b> BPO / Call center</b></H5><br>
+              {%for c in comp3%}
+              <img src="{{c.image1.url}}" style="margin: 2px;width:30%;height: 5%;">
+              {%endfor%}
+            </div>
+          </a>
+        </div>
+      </div>
+
+      <!-- Left and right controls -->
+      <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+      </a>
+      <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+      </a>
+    </div>
+
+
+    <bt><br><br></br>
+  </div>
+  {%endblock%}
+
+  <footer class="container-fluid text-center"  >
+    <center> <h2 style="color: crimson;font-family: Verdana, Geneva, Tahoma, sans-serif;">
+   
+      OUR SERVICES </h2><p style="color: rgb(190, 21, 233);font-size: 16px;"> 
+      For employers who need great people, Find Better, Faster</p><br> </center>
+
+   <div class="row" style="margin-left: 180px;" > 
+
+ 
+  
+    <div class="col-md-4" style="font-size: 17px;font-family:Verdana, Geneva, Tahoma, sans-serif ;text-align: left;">
+      <b style="font-size: 18px;" > Information </b> <br>
+       <a href="/" style="color: rgb(82, 223, 26);">  Home </a> <br>
+     <a href="/aboutus" style="color: rgb(82, 223, 26);">  About </a> <br>
+
+        <a href="/contact" style= "color: rgb(82, 223, 26);" >  Contact </a> <br>
+   <a href="https://www.naukri.com/termsconditions" style= "color: rgb(82, 223, 26);" > Terms & Conditions </a> <br>
+    </div>
+    
+  <div class="col-md-4" style="font-size: 17px;font-family:Verdana, Geneva, Tahoma, sans-serif ;text-align: left;">
+    <b style="font-size: 18px;"> Employers </b> <br>
+     <a href="/" style= "color: rgb(82, 223, 26);"> Home </a> <br>
+          <a href="/RecruitLogin" style= "color: rgb(82, 223, 26);"> Jobs Posting  </a> <br>
+     <a href="/RecruitLogin" style= "color: rgb(82, 223, 26);"> Recruiter Login </a> <br>
+     <a href="/RecruitSignup" style= "color: rgb(82, 223, 26);"> Recruiter Signup </a> <br>
+        </div>
+
+
+    <div class="col-md-4" style="font-size: 17px;font-family:Verdana, Geneva, Tahoma, sans-serif ;text-align: left;">
+   <b style="font-size: 18px;"> Jobseekers </b> <br>
+    <a href="/" style= "color: rgb(82, 223, 26);"> Search Jobs</a> <br>
+   <a href="/ " style= "color: rgb(82, 223, 26);"> Jobs by Category   </a> <br>
+    <a href="/jobcat/8 " style= "color: rgb(82, 223, 26);"> Jobs by Location  </a> <br>
+  <a href="/jobcat/1 " style= "color: rgb(82, 223, 26);"> Jobs by Designation </a> <br>
+    </div>
+
+  
+  </div>
+  </footer>
+
+</body>
+
+</html>

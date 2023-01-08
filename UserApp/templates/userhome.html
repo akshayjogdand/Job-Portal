@@ -1,0 +1,80 @@
+{%extends "homepage.html" %}
+{%block content%}
+<style>
+    #user {
+
+        background-color: hsla(0, 29%, 82%, 0.505);
+        height: auto;
+        width: auto;
+        margin-left: 20px;
+    }
+
+    #one {
+        background-color:hsla(0, 6%, 35%, 0.505);
+        height: 300px;
+    }
+</style>
+<center>
+    <div id="one"><br>
+        <h2 style="font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;color:crimson;"><b> Find Your Dream job
+                Now</b>
+        </h2><br>
+        <div class="card" style=" height:auto;width: 800px; border-radius: 50px;border:3px rgb(235, 214, 214) solid ;">
+            <div class="card-body">
+                <form class="form-inline" method="post" name="myfrm">
+                    {% csrf_token %}
+                    <br>
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="title" name="title1" placeholder="Enter designation"
+                            style="width: 250px;border-radius: 20px;height: 40px;" onblur="remove()">
+                    </div>&nbsp;&nbsp;&nbsp;
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="loc" name="loc1" placeholder="Enter Location"
+                            style="width: 250px;border-radius: 20px;height: 40px;" onblur="remove()">
+                    </div> &nbsp;&nbsp;
+                    <button type="button" class="btn btn-info" style="border-radius:20px;padding:10px; width: 80px;"
+                        onclick="check()">
+                        Search</button>
+                    <br><br>
+
+                </form>
+            </div>
+        </div>
+        <span id="add" style="color:red; font-family: Verdana, Geneva, Tahoma, sans-serif;"></span>
+</center><br>
+
+
+<div class="card bg-light mb-3" style="max-width: 25rem;" id="user">
+    <center>
+        <div class="card-header">
+
+            <img src="{{user.image.url}}" alt="loading" height="120px" width="120px" class="img-circle">
+            <h4 style="font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif">
+                <b style="font-size: 25px;"> {{user.uname}}</b>
+            </h4><br>
+        </div>
+        <div class="card-body">
+
+            <span class="glyphicon" style="font-size: 20px;"> <b> &#x2709; {{user.email}} </b> </span> <br><br>
+            <span class="glyphicon" style="font-size: 20px;"> <b> &#xe182; {{user.phone}} </b> </span><br><br>
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                class="bi bi-person-workspace" viewBox="0 0 16 16">
+                <path d="M4 16s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H4Zm4-5.95a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Z" />
+                <path
+                    d="M2 1a2 2 0 0 0-2 2v9.5A1.5 1.5 0 0 0 1.5 14h.653a5.373 5.373 0 0 1 1.066-2H1V3a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v9h-2.219c.554.654.89 1.373 1.066 2h.653a1.5 1.5 0 0 0 1.5-1.5V3a2 2 0 0 0-2-2H2Z" />
+            </svg> &nbsp;&nbsp; <b style="font-size: 20px;"> {{user.work_status}}</b>
+        </div>
+    </center>
+    </p>
+    <center>
+        <p class="card-text"> <a href="/update" style="font-size: 20px;"> View & Update Profile </a></p><br>
+    </center>
+</div>
+</div>
+
+
+
+
+
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+{%endblock%}

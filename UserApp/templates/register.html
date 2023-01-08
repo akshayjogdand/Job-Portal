@@ -1,0 +1,131 @@
+{%extends "homepage.html" %}
+{%block content%}
+<style>
+    body
+    {
+
+      
+          background-image:url("/static/wall4.webp");
+          background-size: cover;
+          
+            
+        
+    }
+    .alert {
+        width: 300px;
+        height: 40px;
+}
+</style>
+
+<script type="text/javascript">
+$().alert();
+
+setTimeout(function(){$('.alert').alert('close')}, 1000);
+</script>
+
+
+
+{% if messages %}
+{% for message in messages %}
+
+<center> 
+<div class="alert alert-danger alert-dismissible fade in" role="alert">
+<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span>
+</button>
+<center> <h4> <strong> {{message}}</strong>  </h4></center> 
+</div></center>
+{%endfor%}
+{%endif%}
+<section class="vh-100">
+    <h2 align="center" style="font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;color: darkslategray;"> Grow Your Career with Us</h2>
+
+<div class="container py-5 h-100" style=" width:500px;background-color:hsla(0, 29%, 82%, 0.505);">
+<div class="row d-flex align-items-center justify-content-center h-100">
+
+    <div class="card-body p-5 text-center"><br>
+        <h2 style="color:rgb(228, 31, 152);font-family: 'Times New Roman', Times, serif;"><b> Create Account </b>  </h2>
+        <br>
+
+        <form method="post" enctype="multipart/form-data" >
+            {% csrf_token %}
+    
+
+
+            <center>
+                <div class="form-outline mb-4">
+                    <input type="text" class="form-control form-control-lg" placeholder="Full Name"
+                        style="width:350px;background-color:beige;color:rgb(239, 111, 20);" name="uname"
+                        required>
+            </center>
+    </div>
+    <br>
+    <center>
+        <div class="form-outline mb-4">
+            <input type="email" class="form-control form-control-lg" placeholder="Email"
+                style="width:350px;background-color:beige;color:rgb(239, 111, 20);" name="email" required />
+
+        </div><br>
+    </center>
+ 
+    <center>
+        <div class="form-outline mb-4">
+            <input type="password" class="form-control form-control-lg" placeholder="Create Password"
+                required style="width:350px;background-color:beige;color:rgb(239, 111, 20);" name="pwd" required />
+        </div>
+    </center>
+    <br>
+    <center>
+        <div class="form-outline mb-4">
+            <input type="number" class="form-control form-control-lg" placeholder="Mobile Number"
+                style="width:350px;background-color:beige;color:rgb(239, 111, 20);" name="phone" required />
+
+        </div><br>
+    </center>
+    <center>
+    
+        <div class="form-outline mb-4">
+            <label class="custom-file-label" for="file" style="margin-right:60px"> <b> Work Status</b> </label>
+           
+             
+
+                <input class="form-check-input" type="radio" name="work" value="fresher" required  />
+                Fresher &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+
+                <input class="form-check-input" type="radio" name="work"
+                    value="experience" required/>
+                Experience
+
+            
+        </div><br>
+    </center>
+    <center>
+        <div class="form-outline mb-4">
+            <label class="custom-file-label" for="file" > <b> Upload Resume </b> </label>
+            <input class="form-check-input" type="file" name="file"  required style="width:200px ;"  />
+ 
+
+        
+    </div>
+    </center>
+    <br>
+
+
+    <center>
+        <button class="btn btn-primary btn-lg btn-block" type="submit" style="width:350px;"> Create Account
+        </button>
+        <br>
+        <button type="reset" class="btn btn-light btn-block"  style="width:350px; ">Reset All</button>
+        </form>
+        <br><br>
+    </center>
+
+</div>
+
+</div>
+</div>
+</section>
+<br>
+{%endblock%}
+</body>
+
+</html>

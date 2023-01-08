@@ -1,0 +1,13 @@
+{% extends "rhome.html" %}
+{%block data%}
+<div class=" col-lg-5" style="font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif ;margin-top:70px ;background-color:hsla(0, 29%, 82%, 0.505);;width: 650px;"> 
+    <br><br><br>
+    <b style="font-size:30px;margin-left: 110px; margin-top: 20px;">Your Activated Plan : {{user.plan}} </b><br>
+    <b style="font-size:20px;margin-left: 130px;"> Your Plan will Expires on {{user.expiry_date}}</b> <br>
+  
+     <b style="font-size:20px;margin-left: 160px;" > No of post remaining : {{user.post}} </b>
+     <br><br><br><br>
+     </div>
+ 
+
+{%endblock%}

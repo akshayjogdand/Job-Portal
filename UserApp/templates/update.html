@@ -1,0 +1,729 @@
+{%extends "homepage.html" %}
+{% load static %}
+{%block content%}
+<style>
+
+
+    #one {
+        background-color: rgb(226, 220, 220);
+        width: 750px;
+        height: 280px;
+        text-align: left;
+        text-justify: distribute;
+
+    }
+
+    #two,
+    #three {
+        background-color: rgb(226, 220, 220);
+        width: 750px;
+        height: auto;
+        text-align: left;
+        text-justify: distribute;
+       
+    }
+
+    #four,
+    #five {
+        background-color: rgb(226, 220, 220);
+        width: 750px;
+        height: auto;
+        text-align: left;
+        text-justify: distribute;
+    }
+
+    #six {
+        background-color: rgb(226, 220, 220);
+        width: 750px;
+        height: 400px;
+        text-align: left;
+
+    }
+    [hidden]
+    {
+        display: none !important;
+    }
+    .alert {
+            width: 700px;
+            height: 50px;
+        }
+
+</style>
+<script>
+    $(document).ready(function () {
+        function alignModal() {
+            var modalDialog = $(this).find(".modal-dialog");
+
+            // Applying the top margin on modal to align it vertically center
+            modalDialog.css("margin-top", Math.max(0, ($(window).height() - modalDialog.height()) / 2));
+        }
+        // Align modal when it is displayed
+        $(".modal").on("shown.bs.modal", alignModal);
+
+        // Align modal when user resize the window
+        $(window).on("resize", function () {
+            $(".modal:visible").each(alignModal);
+        });
+    });
+
+</script>
+<script type="text/javascript">
+    function edit(id) {
+        myfrm = document.getElementById(id);
+        alert(myfrm);
+        myfrm.submit();
+    }
+    function editExp(id)
+    {
+        myfrm = document.getElementById(id);
+        myfrm.submit();
+    }
+
+        $().alert();
+
+        setTimeout(function(){$('.alert').alert('close')}, 2000);
+
+</script>
+{% if messages %}
+{% for message in messages %}
+<center> 
+<div class="alert alert-danger alert-dismissible fade in" role="alert">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span>
+    </button>
+    <center> <h4> <strong> {{message}}</strong>  </h4></center> 
+</div></center>
+{%endfor%}
+{%endif%}
+
+<div class="row" style="background-color: hsla(252, 72%, 52%, 0.505) ; font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;margin-left:200px ;margin-right:200px ;height: auto; font-size:20px ;" > 
+   
+    <div class="col-sm-2 "> <br>
+<img src="{{user.image.url}}" alt="loading" height="100px" width="100px" class="img-circle" >
+
+<a href="#myModal7" class="glyphicon glyphicon" data-toggle="modal" style="color:black;"> <h2> &#xe046; </h2> </a>
+</div>
+<h2 style="color:white;"> <b> {{user.uname}}</b>&nbsp;
+<a href="#myModal8" class="glyphicon glyphicon-pencil" data-toggle="modal" style="color:black" ></a></h2>
+<div class="col-sm-4 " style="color:white"> 
+
+<span class="glyphicon"><b>  &#xe062; {{user.address}} </b> </span> <br><br>
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-workspace" viewBox="0 0 16 16">
+    <path d="M4 16s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H4Zm4-5.95a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Z"/>
+    <path d="M2 1a2 2 0 0 0-2 2v9.5A1.5 1.5 0 0 0 1.5 14h.653a5.373 5.373 0 0 1 1.066-2H1V3a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v9h-2.219c.554.654.89 1.373 1.066 2h.653a1.5 1.5 0 0 0 1.5-1.5V3a2 2 0 0 0-2-2H2Z"/>
+  </svg> &nbsp;&nbsp;  <b>  {{user.work_status}}</b>
+
+</div>
+<div class="col-sm-4" style="color:white;" > 
+<span class="glyphicon"  >  <b> &#x2709; {{user.email}}  </b> </span>  <br><br>
+<span class="glyphicon" > <b>  &#xe182; {{user.phone}} </b>  </span><br><br>  </div>
+
+</div>
+<form action="/changeProfile" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <br>
+    <div class="form-group">
+
+        <div id="myModal7" class="modal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title"> <b> Change Profile photo </b> </h4>
+                    </div>
+                    <div class="modal-body">
+                        <p class="text-primary"> <input type="file" name="photo" required> </p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel </button>
+                        <button type="submit" class="btn btn-primary">Save </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+<form method="post" action="/personal">
+    {% csrf_token %}
+
+            <div id="myModal8" class="modal">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title"> <b> Update Information </b> </h4>
+                        </div>
+                        <div class="modal-body">
+                            <div
+                                class="d-flex flex-row align-items-center justify-content-center justify-content-lg-start">
+                                <br>
+                                <div class="form-outline mb-4">
+                                    <b> Full Name   </b>
+    
+                                    <input type="text" class="form-control form-control-lg"
+                                        
+                                        style="border-radius:2px;width:500px;background-color:hwb(0 98% 2% / 0.973)"
+                                        name="uname" value="{{user.uname}}" required />
+                                </div>
+                                <br>
+
+                                <div class="form-outline mb-4">
+                                    <b> Email  </b>
+    
+                                    <input type="email" class="form-control form-control-lg"
+                                        
+                                        style="border-radius:2px;width:500px;background-color:hwb(0 98% 2% / 0.973)"
+                                        name="email" value="{{user.email}}" readonly />
+                                </div>
+                                <br>
+                                <div class="form-outline mb-4">
+                                    <b> Mobile No  </b>
+                                    <input type="text" class="form-control form-control-lg"
+                                       
+                                        style="border-radius:2px;width:500px;background-color:hwb(0 98% 2% / 0.973)"
+                                        name="phone" value="{{user.phone}}" required />
+                                </div><br>
+                                <div class="form-outline mb-4">
+                                    <b> Work Status  </b>&nbsp; &nbsp; &nbsp;
+
+                                <input class="form-check-input" type="radio" name="work" value="fresher" required  />
+                                Fresher &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+
+                                <input class="form-check-input" type="radio" name="work"
+                                    value="experience" required/>
+                                Experience
+                                </div>
+                                <br>
+                                <div class="form-outline mb-4">
+                                    <b> Address </b>
+                                    <input type="text" class="form-control form-control-lg" placeholder="Marks"
+                                        style="border-radius:2px;width:500px; ;background-color:hwb(248 90% 7% / 0.963)"
+                                        name="add" value="{{user.address}}" required />
+                                </div><br>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel
+                                </button>
+                                <button type="submit" class="btn btn-primary">Save </button>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+</form>
+
+
+
+<form action="/updateResume" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <center>
+        <div id="one">
+            <div style="margin:15px;">
+                <p class="card-text"> <br> <b style="-webkit-text-stroke-width: 0.5px;"> <u> Resume </u> </b> <br> </p>
+                <p style="color:cadetblue;">Resume is the most important document recruiters look for. Recruiters
+                    generally do not look at profiles without resumes. </p>
+            </div>
+            <div>
+                &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; <b>  {{user.resume}} </b>
+                <a href="{{user.resume.url}}"> Download </a></p>
+                    <script src="{% static 'assets/js/main.js' %}"></script>
+            </div>
+            <div
+                style="border:1px solid;border-color:dimgray;height: 80px;width: 700px; margin-left: 25px; border-style: dotted;margin-top: 5px;">
+                <br>
+             
+                <label class="btn btn-primary" style="margin-left:280px; ">
+                    <b >  UPDATE RESUME  </b> <input type="file" hidden name="file" >
+                </label>
+  
+                <br><br><br>
+                <button type="submit" class="btn btn-primary" style="margin-left: 650px;"
+                    name="action" value="save"> Save
+                </button>
+            </div>
+        </div>
+    </center>
+</form>
+</center>
+<center>
+    <form method="post" action="/updateHeadline">
+        {% csrf_token %}
+        <div id="two">
+
+            <div style="margin:15px;">
+                <p class="card-text"> <br> <b style="-webkit-text-stroke-width: 0.5px;"> <u> Resume Headline </u> </b>
+                    &nbsp; &nbsp; <a href="#myModal10" class="glyphicon glyphicon-pencil" data-toggle="modal"></a> <br>
+                </p>
+
+
+                <p style="color:cadetblue;"> It is the first thing recruiters notice in your profile. Write concisely what makes you unique and right person for the job you are looking for </p>
+                  {{user.resume_headline}}  <br><br>
+
+                <div id="myModal10" class="modal">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title"> <b> Resume Headline </b> </h4>
+                               
+
+                            </div>
+                            <div class="modal-body">
+
+                                <p class="text-primary"> <input type="text" name="headline"
+                                        placeholder="start writing here" required
+                                        style="height:80px;border-radius: 5px; width: 570px;"
+                                        value="{{user.resume_headline}}"> </p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel </button>
+                                <button type="submit" class="btn btn-primary">Save </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </form>
+</center>
+
+<center>
+   
+
+    <form method="post" action="/keySkills">
+        {% csrf_token %}
+        <div id="three">
+
+            <div style="margin:15px;">
+                <p class="card-text"> <br> <b style="-webkit-text-stroke-width: 0.5px;"> <u> Key Skills </u> </b>
+                    &nbsp; &nbsp; <a href="#myModal1" class="glyphicon glyphicon-pencil" data-toggle="modal"></a> <br>
+                </p>
+
+
+                <p style="color:cadetblue;">Tell recruiters what you know or what you are known for e.g. Direct Marketing, Oracle, Java etc. We will send you job recommendations based on these skills. Each skillis separated by a comma.
+                </p>
+                    {{user.key_skills}} <br><br>
+
+
+
+                <div id="myModal1" class="modal">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title"> <b> Key Skills </b> </h4>
+
+                            </div>
+                            <div class="modal-body">
+
+                                <p class="text-primary"> <input type="text" name="skills"
+                                        placeholder="start writing here" value="{{user.key_skills}}" required
+                                        style="height:80px;border-radius: 5px; width: 570px;"> </p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel </button>
+                                <button type="submit" class="btn btn-primary">Save </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </form>
+    </div>
+</center>
+
+<center>
+    <form method="post" action="/userExp">
+        {% csrf_token %}
+        <div id="four">
+
+            <div style="margin:15px;">
+                <p class="card-text"> <br> <b style="-webkit-text-stroke-width: 0.5px;"> <u> Employment </u> </b>
+                    &nbsp; &nbsp; <a href="#myModal2"  data-toggle="modal"
+                        id="pencil"> <B style="margin-left:400px"> ADD EMPLOYMENT  </B>  </a> <br>
+                </p>
+                <p style="color:cadetblue;">Mention your employment details including your current and previous company
+                    work experience.
+                </p><br><br>
+
+
+                <div id="myModal2" class="modal">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title"> <b> Add Employment</b> </h4>
+                            </div>
+                            <div class="modal-body">
+                                <div
+                                    class="d-flex flex-row align-items-center justify-content-center justify-content-lg-start">
+
+                                    <div class="form-outline mb-4">
+                                        <b> Current Company Name </b>
+                                        <input type="text" class="form-control form-control-lg"
+                                            placeholder="Type Your Organization" style=" border-radius:2px;width:500px;background-color:hwb(0 98% 2% /
+                                                0.973)" name="cname" value="{{user.cname}}" required />
+                                    </div>
+                                    <br>
+                                    <div class="form-outline mb-4">
+                                        <b> Current Designation </b>
+                                        <input type="text" class="form-control form-control-lg"
+                                            placeholder="Type Your Designation"
+                                            style="border-radius:2px;width:500px;background-color:hwb(0 98% 2% / 0.973)"
+                                            name="desig" value="{{user.designation}}" required />
+                                    </div>
+
+                                    <br>
+                                    <div class="form-outline mb-4">
+                                        <b> Joining Date </b>
+                                        <input type="date" class="form-control form-control-lg" required name="dt"
+                                            style="border-radius:2px;width:500px;background-color:hwb(0 98% 2% / 0.973)" />
+                                    </div><br>
+                                    <div class="form-outline mb-4">
+                                        <b>Current Salary </b>
+                                        <input type="number" class="form-control form-control-lg"
+                                            placeholder="Eg. 4,50,000"
+                                            style="border-radius:2px;width:500px;background-color:hwb(0 98% 2% / 0.973)"
+                                            name="sal" value="{{user.salary}}" style="border-radius:2px;width:400px"
+                                            required />
+                                    </div><br>
+                                    <div class="form-outline mb-4">
+                                        <b> Job Profile </b>
+                                        <input type="text" class="form-control form-control-lg" placeholder="Type here"
+                                            style="border-radius:2px;width:500px;height:200px ;background-color:hwb(248 90% 7% / 0.963)"
+                                            name="pro" value="{{user.profile}}" required />
+                                    </div><br>
+                                    <div class="form-outline mb-4">
+                                        <b> Notice Period </b>
+
+                                        <select name="notice" class="form-control"
+                                            style="border-radius:2px;width:500px;background-color:hwb(248 90% 7% / 0.963)">
+                                            <option>15 Days or less</option>
+                                            <option>1 Months</option>
+                                            <option>2 Months</option>
+                                            <option>3 Months </option>
+                                            <option>More than 3 Months</option>
+
+                                        </select>
+                                    </div><br>
+
+
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel
+                                    </button>
+                                    <button type="submit" class="btn btn-primary">Save </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+    </form>
+    {%for emp in u1%}
+    <form method="post" action="/editExp/{{emp.id}}" id="edit{{emp.id}}"> 
+         {% csrf_token %}
+    <b> {{emp.designation}} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#myModal1{{emp.id}}"
+            class="glyphicon glyphicon-pencil" data-toggle="modal"></a></b><br>{{emp.cname}} <br> From
+    {{emp.Join_date}}<br> Notice Period {{emp.notice_period}} <br><br>
+
+    <div id="myModal1{{emp.id}}" class="modal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                      <b style="font-size:large ;"> Edit Data </b>
+                    <a href="/deleteExp/{{emp.id}}" style="margin-left:450px;color:rgb(175, 11, 239)"> Delete  </a>
+                </div>
+                <div class="modal-body">
+                    <div class="d-flex flex-row align-items-center justify-content-center justify-content-lg-start">
+
+                        <div class="form-outline mb-4">
+                            <b> Current Company Name </b>
+                            <input type="text" class="form-control form-control-lg" placeholder="Type Your Organization"
+                                style=" border-radius:2px;width:500px;background-color:hwb(0 98% 2% /
+                                    0.973)" name="cname" value="{{emp.cname}}" required />
+                        </div>
+                        <br>
+                        <div class="form-outline mb-4">
+                            <b> Current Designation </b>
+                            <input type="text" class="form-control form-control-lg" placeholder="Type Your Designation"
+                                style="border-radius:2px;width:500px;background-color:hwb(0 98% 2% / 0.973)"
+                                name="desig" value="{{emp.designation}}" required />
+                        </div>
+
+                        <br>
+                        <div class="form-outline mb-4">
+                            <b> Joining Date </b>
+                            <input type="date" class="form-control form-control-lg" required name="dt" value="{{emp.Join_date}}"
+                                style="border-radius:2px;width:500px;background-color:hwb(0 98% 2% / 0.973)" />
+                        </div><br>
+                        <div class="form-outline mb-4">
+                            <b>Current Salary </b>
+                            <input type="number" class="form-control form-control-lg" placeholder="Eg. 4,50,000"
+                                style="border-radius:2px;width:500px;background-color:hwb(0 98% 2% / 0.973)" name="sal"
+                                value="{{emp.salary}}" style="border-radius:2px;width:400px" required />
+                        </div><br>
+                        <div class="form-outline mb-4">
+                            <b> Job Profile </b>
+                            <input type="text" class="form-control form-control-lg" placeholder="Type here"
+                                style="border-radius:2px;width:500px;height:200px ;background-color:hwb(248 90% 7% / 0.963)"
+                                name="pro" value="{{emp.profile}}" required />
+                        </div><br>
+                        <div class="form-outline mb-4">
+                            <b> Notice Period </b>
+
+                            <select name="notice" class="form-control "
+                                style="border-radius:2px;width:500px;background-color:hwb(248 90% 7% / 0.963)" value="{{emp.notice_period}]">
+                                <option>15 Days or less</option>
+                                <option>1 Months</option>
+                                <option>2 Months</option>
+                                <option>3 Months </option>
+                                <option>More than 3 Months</option>
+
+                            </select>
+                        </div><br>
+
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel
+                        </button>
+                        <button type="button" class="btn btn-primary" onclick="editExp('edit{{emp.id}}')">Save </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </form>
+    {%endfor%}
+
+    </div>
+
+</center>
+
+<center>
+    
+    <form method="post" action="/useredu">
+        {% csrf_token %}
+        <div id="five">
+
+            <div style="margin:15px;">
+                <p class="card-text"> <br> <b style="-webkit-text-stroke-width: 0.5px;"> <u> Education </u> </b>
+                    &nbsp; &nbsp; <a href="#myModal3" data-toggle="modal"> <B style="margin-left:450px">ADD EDUCATION
+                        </B></a>
+                </p>
+                <p style="color:cadetblue;">
+                    Mention your Education details here </p>
+
+                <div id="myModal3" class="modal">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title"> <b> Add Education</b> </h4>
+                            </div>
+
+                            <div class="modal-body">
+
+                                <div
+                                    class="d-flex flex-row align-items-center justify-content-center justify-content-lg-start">
+                                    <br>
+                                    <div class="form-outline mb-4">
+                                        <b> Education </b>
+                                        <input type="text" class="form-control form-control-lg"
+                                            placeholder="Graduation/Diploma"
+                                            style="border-radius:2px;width:500px;background-color:hwb(0 98% 2% / 0.973)"
+                                            name="edu" value="{{emp.education}}" required />
+                                    </div>
+                                    <br>
+                                    <div class="form-outline mb-4">
+                                        <b> University/Institute </b>
+                                        <input type="text" class="form-control form-control-lg"
+                                            placeholder="Select university/institute"
+                                            style="border-radius:2px;width:500px;background-color:hwb(0 98% 2% / 0.973)"
+                                            name="inst" value="{{emp.university}}" required />
+                                    </div><br>
+                                    <div class="form-outline mb-4">
+                                        <b> Course </b>
+                                        <input type="text" class="form-control form-control-lg"
+                                            placeholder="Enter Course"
+                                            style="border-radius:2px;width:500px;background-color:hwb(0 98% 2% / 0.973)"
+                                            name="course" value="{{emp.course}}" required />
+                                    </div>
+
+                                    <br>
+                                    <br>
+                                    <div class="form-outline mb-4">
+                                        <b> Marks/Percentage </b>
+                                        <input type="text" class="form-control form-control-lg" placeholder="Marks"
+                                            style="border-radius:2px;width:500px; ;background-color:hwb(248 90% 7% / 0.963)"
+                                            name="mk" value="{{emp.marks}}" required />
+                                    </div><br>
+                                    <div class="form-outline mb-4">
+                                        <b> Passing Year </b>
+                                        <input type="number" class="form-control form-control-lg" placeholder="Marks"
+                                            style="border-radius:2px;width:500px; ;background-color:hwb(248 90% 7% / 0.963)"
+                                            name="yr" value="{{emp.year}}" required />
+                                    </div><br>
+
+
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel
+                                    </button>
+                                    <button type="submit" class="btn btn-primary">Save </button>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+    </form>
+
+    <table class="table table-hover">
+        <tr>
+            <th> Education </th>
+            <th> Course</th>
+            <th>University</th>
+            <th> Percentage</th>
+            <th> Passing Year</th>
+            <th> Edit </th>
+            <th></th>
+
+        </tr>
+
+        {%for emp in u2%}
+        <form method="post" action="/editEdu/{{emp.id}}" id="editEdu{{emp.id}}">
+            {% csrf_token %}
+            <tr>
+                <td> <b> {{emp.education}} </b>
+                <td> {{emp.course}} </td>
+                <td> {{emp.marks}}% </td>
+                <td> {{emp.university}} </td>
+                <td> {{emp.year}}</td>
+                <td> <a href="#myModal{{emp.education}}" class="glyphicon glyphicon-pencil" data-toggle="modal">
+                    </a></td>
+            </tr>
+            <div id="myModal{{emp.education}}" class="modal">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title"> <b> Add Education</b> </h4>
+                        </div>
+
+                        <div class="modal-body">
+
+                            <div
+                                class="d-flex flex-row align-items-center justify-content-center justify-content-lg-start">
+                                <br>
+                                <div class="form-outline mb-4">
+                                    <b> Education </b>
+                                    <input type="text" class="form-control form-control-lg"
+                                        placeholder="Graduation/Diploma"
+                                        style="border-radius:2px;width:500px;background-color:hwb(0 98% 2% / 0.973)"
+                                        name="edu" value="{{emp.education}}" required />
+                                </div>
+                                <br>
+                                <div class="form-outline mb-4">
+                                    <b> University/Institute </b>
+                                    <input type="text" class="form-control form-control-lg"
+                                        placeholder="Select university/institute"
+                                        style="border-radius:2px;width:500px;background-color:hwb(0 98% 2% / 0.973)"
+                                        name="inst" value="{{emp.university}}" required />
+                                </div><br>
+                                <div class="form-outline mb-4">
+                                    <b> Course </b>
+                                    <input type="text" class="form-control form-control-lg" placeholder="Enter Course"
+                                        style="border-radius:2px;width:500px;background-color:hwb(0 98% 2% / 0.973)"
+                                        name="course" value="{{emp.course}}" required />
+                                </div>
+
+                                <br>
+                                <br>
+                                <div class="form-outline mb-4">
+                                    <b> Marks/Percentage </b>
+                                    <input type="text" class="form-control form-control-lg" placeholder="Marks"
+                                        style="border-radius:2px;width:500px; ;background-color:hwb(248 90% 7% / 0.963)"
+                                        name="mk" value="{{emp.marks}}" required />
+                                </div><br>
+                                <hr>
+
+
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel
+                                </button>
+                                <button type="button" onclick="edit('editEdu{{emp.id}}')" class="btn btn-primary"> Save
+                                </button>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+        {%endfor%}
+    </table><br>
+
+
+
+
+
+</center>
+
+
+<center>
+    <div id="six">
+        <div style="margin:15px;">
+            <p class="card-text"> <br> <b style="-webkit-text-stroke-width: 0.5px;"> <u> Personal Details </u> </b> <br>
+            </p>
+            <form method="post" action="/personal1">
+                {% csrf_token %}
+
+                <br><b> Gender : &nbsp;&nbsp; {{user.gender}} </b>
+                <div class="form-outline mb-4">
+                    <div class="form-check form-check-inline mb-0 me-4">
+                        <input class="form-check-input" type="radio" name="gender" value="Male" required />
+                        Male &nbsp;
+
+                        <input class="form-check-input" type="radio" name="gender" value="Female" required />
+                        Female &nbsp;
+
+                        <input class="form-check-input" type="radio" name="gender" value="Transgender"  required/>
+                        Transgender &nbsp;
+                    </div>
+                </div>
+
+                <br>
+                <div class="form-outline mb-4">
+                    <b> Date of Birth : &nbsp;&nbsp; {{user.DOB}}</b>
+                    <input type="date" class="form-control form-control-lg" 
+                        style="border-radius:2px;width:200px;background-color:hwb(198 77% 15% / 0.973);" name="dob"
+                         />
+                </div><br>
+                <div class="form-outline mb-4">
+                    <b> Permanent Address </b>
+                    <input type="text" class="form-control form-control-lg" placeholder="Enter full Address"
+                        style="border-radius:2px;width:500px;height:50px;background-color:hwb(198 77% 15% / 0.973);"
+                        name="add" value="{{user.address}}" required />
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel </button>
+                    <button type="submit" class="btn btn-primary">Save </button>
+                </div>
+
+        </div>
+    </div>
+    </form>
+
+    </div>
+
+</center>
+<br>
+
+
+
+
+
+
+
+{%endblock%}

@@ -1,0 +1,89 @@
+{% extends "rlogin.html" %}
+{%block content%}
+{% if messages %}
+{% for message in messages %}
+<center> 
+    <div class="alert alert-danger alert-dismissible fade in" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span>
+        </button>
+        <center> <h4> <strong> {{message}}</strong>  </h4></center> 
+    </div></center>
+{%endfor%}
+{%endif%}
+<section class="vh-100" style="margin-top: 40px;">
+   
+
+    <div class="container py-5 h-100" style=" width:500px;background-color:hsla(0, 29%, 82%, 0.505);">
+        <div class="row d-flex align-items-center justify-content-center h-100">
+
+            <div class="card-body p-5 text-center"><br><br>
+                <h2 style="color:rgb(202, 9, 227);font-family: 'Times New Roman', Times, serif;">  Edit Profile </h2>
+                <br>
+
+                <form method="post" enctype="multipart/form-data" >
+                    {% csrf_token %}
+
+                    <center>
+                        <div class="form-outline mb-4">
+                            <input type="text" class="form-control form-control-lg" placeholder="Company Name"
+                                style="width:350px;background-color:beige;color:rgb(239, 111, 20);" name="cname"
+                                value="{{user.cname}}" readonly>
+                    </center>
+            </div>
+            <br>
+            <center>
+                <div class="form-outline mb-4">
+                    <input type="email" class="form-control form-control-lg" placeholder="Official Email"
+                        style="width:350px;background-color:beige;color:rgb(239, 111, 20);" name="email"
+                        value="{{user.email}}" readonly/>
+
+                </div><br>
+            </center>
+            <center>
+                <div class="form-outline mb-4">
+                    <input type="number" class="form-control form-control-lg" placeholder="Phone Number"
+                        style="width:350px;background-color:beige;color:rgb(239, 111, 20);" name="phone" 
+                        value="{{user.phone}}" required />
+
+                </div><br>
+            </center>
+            <center>
+                <div class="form-outline mb-4">
+                    <input type="text" class="form-control form-control-lg" placeholder="Contact Person Name"
+                        style="width:350px;background-color:beige;color:rgb(239, 111, 20);" name="person" 
+                        value="{{user.person}}" required />
+
+                </div><br>
+            </center>
+
+            <div class="form-outline mb-4">
+                <input type="number" class="form-control form-control-lg" placeholder="Pincode"
+                    style="width:100px;background-color:beige;margin-left:80px ;color:rgb(239, 111, 20);" name="pin"
+                    value="{{user.pincode}}" required />
+            </div><br>
+            <center>
+                <div class="form-outline mb-4">
+                    <input type="text" class="form-control form-control-lg" placeholder="Address"
+                        style="width:350px;background-color:beige;color:rgb(239, 111, 20);" name="add"
+                        value="{{user.address1}}" required />
+
+                </div><br>
+            </center>
+            <div class="form-outline mb-4">
+            <label   style="margin-left: 80px;" >
+                <b >  Upload Company Logo  </b> <input type="file"  name="file" value="{{user.image1}}">
+                        </label><br><br></div>
+
+            <center>
+                <button class="btn btn-primary btn-lg btn-block" type="submit" style="width:350px;"> Update Profile 
+                </button></center>
+                </form>
+                <br>
+        </div>
+
+     
+
+    </div>
+    </div>
+</section>
+{%endblock%}

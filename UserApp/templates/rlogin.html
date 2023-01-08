@@ -1,0 +1,184 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <style>
+        body{
+          background-image:url("/static/wall4.webp");
+          background-size: cover;
+          
+            
+        }
+        /* Remove the navbar's default margin-bottom and rounded borders */
+        .navbar {
+            margin-bottom: 0;
+            border-radius: 0;
+
+        }
+        footer {
+      background-color: rgb(241, 243, 245);
+      padding: 25px;
+    }
+
+   
+        .alert {
+            width: 700px;
+            height: 50px;
+        }
+    </style>
+    <script type="text/javascript">
+        $().alert();
+
+        setTimeout(function(){$('.alert').alert('close')}, 2000);
+    </script>
+</head>
+
+<body>
+    <nav class="navbar navbar-default" >
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>                        
+                  </button>
+          
+          
+                <img src="{% static 'logo.jpg'%}" alt="loading" height="80px" width="80px" class="img-circle">
+            </div>
+            <div class="collapse navbar-collapse" id="myNavbar">
+                <ul class="nav navbar-nav">
+                    <br>
+                    <li> &nbsp;&nbsp;&nbsp;&nbsp; </li>
+                    <li class="active"><a href="/" style="color:black;font-size: large;"> Home </a></li>
+                    <li> &nbsp;&nbsp;&nbsp;&nbsp; </li>
+                    <li><a href="/aboutus" style="color:black;font-size: large;"> About </a></li>
+                    <li> &nbsp; &nbsp; &nbsp; &nbsp;  </li>
+                    {%if "pwd" in request.session%}
+                    <li> <a href="/addJob" style="color:white;font-size: medium;" class="btn btn-primary">  Post A New Job </a> </li>
+                      {%endif%}
+                </ul>    
+                    <ul class="nav navbar-nav navbar-right"> 
+                        {%if "pwd" in request.session%}
+                        <br>
+                    <li><a href="/logout" class="btn btn-default" style="border-radius:20px;color:black">
+                      <b> Logout </b>
+                    </a></li>
+                    {%endif%}</ul>
+                
+            </div>
+        </div>
+    </nav>
+    
+
+{%block content%}
+{% if messages %}
+{% for message in messages %}
+<center> 
+<div class="alert alert-danger alert-dismissible fade in" role="alert">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span>
+    </button>
+    <center> <h4> <strong> {{message}}</strong>  </h4></center> 
+</div></center>
+{%endfor%}
+{%endif%}
+    <section class="vh-100">
+        <br><br><br>
+
+        <div class="container py-5 h-100" style=" width:500px;background-color:hsla(0, 11%, 59%, 0.505);" >
+            <div class="row d-flex align-items-center justify-content-center h-100">
+
+                <div class="card-body p-5 text-center">
+                    <h2 style="color:rgb(202, 9, 227);font-family:Verdana, Geneva, Tahoma, sans-serif" >  LOGIN    </h2><br>
+
+
+                <form method="post"> 
+                    {% csrf_token %}
+               
+
+                    <center>
+                        <div class="form-outline mb-4">
+                            <input type="email" class="form-control form-control-lg"
+                                placeholder="Email" name="email" style="width:400px;background-color:beige;color:rgb(239, 111, 20)" required>
+                    </center>
+                </div>
+                <br>
+                <center>
+                    <div class="form-outline mb-4">
+                        <input type="password"  class="form-control form-control-lg"
+                            placeholder="Password" name="pwd" style="width:400px;background-color:beige;color:rgb(239, 111, 20)" required />
+
+                    </div><br>
+                </center>
+                <center>
+                    <button class="btn btn-primary btn-lg btn-block" type="submit" style="width:400px;">Login</button>
+                <br>
+  
+                
+                <h3 style="color:rgb(243, 108, 12);font-size: medium;"> 
+                    <b> Are you new client?  </b>   </h3>
+
+                
+
+                <a href="RecruitSignup" class="btn btn-default btn-lg btn-block"  style="width:400px;" > Register Now</a></center>
+                <br>
+            </div>
+        </form>
+
+        </div>
+        </div>
+    </section>
+    {%endblock%}
+    <br><br><br><br>
+    <footer class="container-fluid text-center"  >
+        <center> <h2 style="color: crimson;font-family: Verdana, Geneva, Tahoma, sans-serif;">
+       
+          OUR SERVICES </h2><p style="color: rgb(190, 21, 233);font-size: 16px;"> 
+          For employers who need great people, Find Better, Faster</p><br> </center>
+    
+       <div class="row" style="margin-left: 180px;" > 
+    
+     
+      
+        <div class="col-md-4" style="font-size: 17px;font-family:Verdana, Geneva, Tahoma, sans-serif ;text-align: left;">
+          <b style="font-size: 18px;" > Information </b> <br>
+           <a href="/" style="color: rgb(82, 223, 26);">  Home </a> <br>
+         <a href="/aboutus" style="color: rgb(82, 223, 26);">  About </a> <br>
+    
+            <a href="/contact" style= "color: rgb(82, 223, 26);" >  Contact </a> <br>
+       <a href="https://www.naukri.com/termsconditions" style= "color: rgb(82, 223, 26);" > Terms & Conditions </a> <br>
+        </div>
+        
+      <div class="col-md-4" style="font-size: 17px;font-family:Verdana, Geneva, Tahoma, sans-serif ;text-align: left;">
+        <b style="font-size: 18px;"> Employers </b> <br>
+         <a href="/" style= "color: rgb(82, 223, 26);"> Home </a> <br>
+              <a href="/RecruitLogin" style= "color: rgb(82, 223, 26);"> Jobs Posting  </a> <br>
+         <a href="/RecruitLogin" style= "color: rgb(82, 223, 26);"> Recruiter Login </a> <br>
+         <a href="/RecruitSignup" style= "color: rgb(82, 223, 26);"> Recruiter Signup </a> <br>
+            </div>
+    
+    
+        <div class="col-md-4" style="font-size: 17px;font-family:Verdana, Geneva, Tahoma, sans-serif ;text-align: left;">
+       <b style="font-size: 18px;"> Jobseekers </b> <br>
+        <a href="/" style= "color: rgb(82, 223, 26);"> Search Jobs</a> <br>
+       <a href="/ " style= "color: rgb(82, 223, 26);"> Jobs by Category   </a> <br>
+        <a href="/jobcat/8 " style= "color: rgb(82, 223, 26);"> Jobs by Location  </a> <br>
+      <a href="/jobcat/1 " style= "color: rgb(82, 223, 26);"> Jobs by Designation </a> <br>
+        </div>
+    
+      
+      </div>
+      </footer>
+    
+    
+</body>
+
+</html>

@@ -1,0 +1,118 @@
+{% extends "rlogin.html" %}
+{%block content%}
+
+{% if messages %}
+{% for message in messages %}
+<center>
+    <div class="alert alert-success alert-dismissible" style="width:400px ;">
+        <a href="#" class="close" data-dismiss="alert" aria-lable="close"> &times;
+        </a>
+        <center> <strong> {{message}}</strong> </center>
+    </div>
+</center>
+{%endfor%}
+{%endif%}
+<br>
+<center>
+    <b>
+        <h3 style="color:rgb(182, 41, 128);font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">
+            <u> Post A Job </u>
+        </h3>
+        <h2 style="font-family:Verdana, Geneva, Tahoma, sans-serif"> Quick & Easy Job Posting</h2>
+    </b>
+</center><br>
+<form method="post">
+    {% csrf_token %}
+    <table> <tr> 
+        
+    <td> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td><td> 
+        <td> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td><td> 
+    <center>
+      
+
+        <div class="card bg-light mb-3" style="max-width: 40rem;background-color:hsla(0, 14%, 89%, 0.505);">
+            <br>
+            <center>
+                <div class="card-header">
+                    <h3 style="color:rgb(163, 73, 246);font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif">
+                        <b>
+                            STANDARD-VACANCY </b>
+                    </h3>
+                </div>
+                <div class="card-body">
+                    <h5 style="font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif"> Advance job
+                        posting </h5>
+
+                    <h1>&#8377; 8000 </h1>
+
+                </div>
+                <h4> <b>For All Cities </b></h4><br>
+            </center>
+            <ul style="font-size:20px ;font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif">
+
+                <li> Detailed Job Decription </li>
+                <li> Job Branding </li>
+                <li> 1 Year Subscription</li>
+                <li> Unlimited Post </li>
+            </ul>
+            <center>
+                <button class="btn btn-primary btn-lg btn-block" type="submit" name="action" value="hot"
+                    style="width:350px;"> BUY
+                    NOW</button>
+            </center><br><br>
+        </div><br><br>
+    </center></td>
+
+    <td> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  </td>
+
+    <td>
+    <center>
+        <div class="card bg-light mb-3" style="max-width: 40rem;background-color:hsla(0, 14%, 89%, 0.505);">
+            <br>
+            <center>
+                <div class="card-header">
+                    <h3 style="color:rgb(163, 73, 246);font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif">
+                        <b>
+                            REGULAR-VACANCY </b>
+                    </h3>
+                </div>
+                <div class="card-body">
+                    <h5 style="font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif"> Basic job
+                        posting </h5>
+                    <h1>&#8377; 5000 </h1>
+
+                </div>
+                <h4> <b>For All Cities </b></h4><br>
+            </center>
+            <ul style="font-size:20px ;font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif">
+
+                <li> 250 Characters in Job Decription </li>
+                <li> No Job Branding </li>
+                <li> 6 months Subscription</li>
+                <li> Limited Post </li>
+            </ul>
+            <center>
+                <button class="btn btn-primary btn-lg btn-block" type="submit" style="width:350px;" name="action"
+                    value="basic"> BUY
+                    NOW</button>
+            </center><br><br>
+
+        </div>
+        <br><br>
+
+
+
+    </center></td>
+</tr></table>
+
+
+
+</form><br><br><br>
+
+
+
+
+
+
+
+{%endblock%}

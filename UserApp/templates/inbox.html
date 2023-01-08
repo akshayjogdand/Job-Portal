@@ -1,0 +1,23 @@
+{%extends "homepage.html" %}
+{%block content%}
+<br><br>
+{%for msg in msgs%}
+<div style="background-color: white;margin-left: 400px;margin-right: 400px;padding: 15px;font-family: Verdana, Geneva, Tahoma, sans-serif;">
+
+    <h3> <b> {{msg.company.person}} </b> 
+<img src="{{msg.company.image1.url}}" height="70px" width="70px" align="right"> </h3>
+<h4> {{msg.company.cname}} </h4>
+<h5> {{msg.company.address1}}</h5>
+<h5>  Regarding {{msg.job.title}}</h5>
+
+<h5> Hi {{msg.uname.uname}}, </h5>
+<h5 style="padding: 5px;"> {{msg.msg}}</h5>
+<H5> Address :  {{msg.company.address1}}</H5>
+
+<h5> Contact number : {{msg.company.phone}}</h5>
+<h5>  Date : {{msg.date}} </h5>
+</div>
+<br><br><br><br><br><br>
+{%endfor%}
+
+{%endblock%}

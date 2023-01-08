@@ -1,0 +1,37 @@
+{%extends "homepage.html" %}
+{%block content%}
+<section class="vh-100">
+    <br><br><br>
+
+    <div class="container py-5 h-100" style=" width:500px;background-color:hsla(0, 11%, 59%, 0.505);" >
+        <div class="row d-flex align-items-center justify-content-center h-100">
+
+            <div class="card-body p-5 text-center">
+                <h2 style="color:rgb(202, 9, 227);font-family:Verdana, Geneva, Tahoma, sans-serif" > Reset Password   </h2><br>
+
+            <form method="post" action="/resetpass"> 
+                {% csrf_token %}
+           
+
+                <center>
+                    <div class="form-outline mb-4">
+                        <input type="email" class="form-control form-control-lg"
+                            placeholder="Email" name="email" style="width:400px;background-color:beige;color:rgb(239, 111, 20)" required>
+                </center>
+            </div>
+            <br>
+
+            <center>
+                <button class="btn btn-primary btn-lg btn-block" type="submit" style="width:400px;">Submit </button>
+            <br></center>
+            <br>
+        </div>
+    </form>
+
+    </div>
+    </div>
+    <br><br><br><br> <br><br><br><br>
+</section>
+
+
+{%endblock%}

@@ -1,0 +1,103 @@
+{% extends "rlogin.html" %}
+{%block content%}
+{% if messages %}
+{% for message in messages %}
+<center> 
+<div class="alert alert-danger alert-dismissible fade in" role="alert">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span>
+    </button>
+    <center> <h4> <strong> {{message}}</strong>  </h4></center> 
+</div></center>
+{%endfor%}
+{%endif%}
+
+
+
+
+    <div class="row" style="background-color:blue; font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;margin-left:20px ;margin-right:20px ;height: auto;" > 
+
+        <div class="col-sm-1 "> <br>
+    <img src="{{user.image1.url}}" alt="loading" height="80px" width="80px" class="img-circle" >
+    </div>
+    <h2 style="color:white; margin-left:110px;"> <b> {{user.cname}} Pvt Ltd.
+    </b></h2>
+    <div class="col-sm-3 " style="color:white"> 
+
+    <span class="glyphicon"><b>  &#xe062; {{user.address1}} </b> </span> <br><br>
+    <span class="glyphicon" > <b> &#xe008; {{user.person}}  </b> </span> </div>
+    <div class="col-sm-4" style="color:white;" > 
+    <span class="glyphicon"  >  <b> &#x2709; {{user.email}}  </b> </span>  <br><br>
+    <span class="glyphicon" > <b>  &#xe182; {{user.phone}} </b>  </span>  </div>
+    <div class="col-sm-4 " style="color:white"> 
+      
+   <b style="font-size:25px; ">Your Activated Plan : {{user.plan}} </b><br>
+  <!--<b style="font-size:15px;margin-left:30px"> Your Plan will Expires on {{user.expiry_date}}</b> <br>
+
+   <b style="font-size:15px;margin-left:65px ;" > No Of post remaining : {{user.post}} </b>-->
+
+   <br><br>
+   </div>
+   
+    </div>
+
+
+
+<div class="row">
+<div class="col-lg-4 "> 
+    <br><br>
+
+    <div class="dropdown">
+        <button class="btn btn-secondary btn-lg dropdown-toggle" type="button " data-toggle="dropdown" style="margin-left:30px;width:200px;height: 50px; "> <b> Administration   </b> &nbsp; 
+        <span class="caret"></span></button> 
+        <ul class="dropdown-menu" style="margin-left:30px;width:200px;font-size:medium;font-family:cursive; background-color:rgb(207, 188, 188) ;">
+
+     
+      
+          <li><a href="/ChangePass"> Change Password </a></li>
+          <li class="divider"></li>
+          <li><a href="/EditData">Edit Profile  </a></li>
+          <li class="divider"></li>
+          <li><a href="/sub ">Subscription status </a></li>
+          <li class="divider"></li>
+          <li><a href="/send/{{user.id}}">Manage Response  </a></li>
+          <li class="divider"></li>
+          <li><a href="/records"> All Jobs  </a></li>
+          <li class="divider"></li>
+          <li><a href="/logout">Logout </a></li>
+
+        </ul>
+      </div>
+    </div>
+{%block data%}
+    <div class=" col-lg-6" style="border:hsla(0, 4%, 5%, 0.505) 2px dashed;height:300px ;font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif ;margin-top:50px ;"> 
+        <h4 > <b> Recently Posted Job  </b>  </h4>
+ 
+     <table class="table table-hover" style="background-color:hsla(0, 20%, 86%, 0.505);">
+         
+         <tr  style="font-size:20px;" >
+             <th> Job Title </th>
+             <th> Posted on </th>
+             <th> Response </th>
+         </tr>
+         {%for j in job%}
+         <tr style="font-size:15px;font-family: Verdana, Geneva, Tahoma, sans-serif;"> 
+            <td> <a href="/resp/{{j.id}}" style="color:black;"> {{j.title}}</a></td>
+          <td> {{j.start_date}}</td>
+          <td>{{j.response}}</td> 
+          
+        </tr>
+        {%endfor%}
+         
+         </table>
+        
+     </div>
+     {%endblock%}
+     </div>
+
+
+
+
+
+
+
+{%endblock%}

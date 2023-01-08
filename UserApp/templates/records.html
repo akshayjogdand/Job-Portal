@@ -1,0 +1,158 @@
+{% extends "rhome.html" %}
+{%block data%}
+<script type="text/javascript">
+    function edit(id) {
+        myfrm = document.getElementById(id);
+        // alert(myfrm);
+        myfrm.submit();
+
+    }
+    function del(id) {
+        myfrm = document.getElementById(id);
+        // alert(myfrm);
+        myfrm.submit();
+
+    }
+ 
+    $(document).ready(function () {
+        function alignModal() {
+            var modalDialog = $(this).find(".modal-dialog");
+
+            // Applying the top margin on modal to align it vertically center
+            modalDialog.css("margin-top", Math.max(0, ($(window).height() - modalDialog.height()) / 2));
+        }
+        // Align modal when it is displayed
+        $(".modal").on("shown.bs.modal", alignModal);
+
+        // Align modal when user resize the window
+        $(window).on("resize", function () {
+            $(".modal:visible").each(alignModal);
+        });
+    });
+
+</script>
+
+<div class=" col-lg-6"
+    style="font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif ;margin-top:70px  ;width: 800px;">
+    {%for job in jobs%}
+    <div style="background-color:white; ">
+        <br>
+        <div class="col-sm-11">
+            <b style="font-size:20px;margin:20px;color: blue;"> {{job.title}} &nbsp; &nbsp;
+                <a href="#myModal{{job.id}}" class="glyphicon glyphicon-pencil" data-toggle="modal"></a> </b>
+        </div>
+        <div class="col-sm-1">
+            <a href="#myModal1{{job.id}}" class="glyphicon glyphicon-trash" data-toggle="modal"></a></div>
+        <center>
+            <form method="post" action="/deletejob/{{job.id}}" id="myfrm{{job.id}}">
+                {% csrf_token %}
+                <div id="two">
+                        <div id="myModal1{{job.id}}" class="modal">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h4 class="modal-title"> <b> Confirmation </b> </h4>
+                                    </div>
+                                    <div class="modal-body">
+                                       <h3>Do you sure want to delete?  </h3> 
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel </button>
+                                        <button type="button" class="btn btn-primary" onclick="del('myfrm{{job.id}}')">Save
+                                        </button> 
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                </div>
+            </form>
+        </center> 
+
+
+
+        <center>
+            <form method="post" action="/editjob/{{job.id}}" id="myfrm{{job.id}}">
+                {% csrf_token %}
+                <div id="myModal{{job.id}}" class="modal">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <h4> <b>Update Information </b></h4>
+                            <div class="modal-body">
+                                <div class="form-outline mb-4">
+                                    <b style="margin-right:290px ;"> Job Title </b>
+                                    <input type="text" class="form-control form-control-lg" placeholder="Job Title"
+                                        style="width:350px;background-color:beige;color:rgb(239, 111, 20);" name="title"
+                                        value="{{job.title}}" required>
+                                </div>
+                                <br>
+                                <div class="form-outline mb-4">
+                                    <b style="margin-right:220px ;"> Experience required </b>
+                                    <input type="text" class="form-control form-control-lg"
+                                        placeholder="Experience Required"
+                                        style="width:350px;background-color:beige;color:rgb(239, 111, 20);"
+                                        name="experience" value="{{job.Experience}}" required />
+                                </div><br>
+                                <div class="form-outline mb-4">
+                                    <b style="margin-right:290px ;"> Salary </b>
+                                    <input type="text" class="form-control form-control-lg" placeholder="Salary"
+                                        style="width:350px;background-color:beige;color:rgb(239, 111, 20);"
+                                        name="salary" value="{{job.salary}}" />
+
+                                </div><br>
+                                <div class="form-outline mb-4">
+                                    <b style="margin-right:220px ;"> Education Required </b>
+                                    <input type="text" class="form-control form-control-lg"
+                                        placeholder="Education Required"
+                                        style="width:350px;background-color:beige;color:rgb(239, 111, 20);"
+                                        name="education" value="{{job.Education}}" required />
+                                </div><br>
+                                <div class="form-outline mb-4">
+                                    <b style="margin-right:250px ;"> Skills Required </b>
+                                    <input type="text" class="form-control form-control-lg"
+                                        placeholder="Key Skills required"
+                                        style="width:350px;background-color:beige;color:rgb(239, 111, 20);"
+                                        name="skills" value="{{job.skills}}" required />
+                                </div><br>
+                                <div class="form-outline mb-4">
+                                    <b style="margin-right:250px ;"> No of openings</b>
+
+                                    <input type="number" class="form-control form-control-lg"
+                                        placeholder="No of opening"
+                                        style="width:350px;background-color:beige;color:rgb(239, 111, 20);" name="nof"
+                                        value="{{job.no_openig}}" required />
+                                </div><br>
+                                <div class="form-outline mb-4">
+                                    <b style="margin-right:250px ;"> Job Description </b>
+                                    <input type="text" class="form-control form-control-lg"
+                                        placeholder="Job Description"
+                                        style="width:350px;background-color:beige;color:rgb(239, 111, 20); height:60px"
+                                        name="description" value="{{job.description}}" required />
+                                </div><br>
+                                <br>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel </button>
+                                <button type="button" class="btn btn-primary" onclick="edit('myfrm{{job.id}}')">Save
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </center>
+        <br>
+        <p style="margin:20px;">
+            <b> Job Description </b>: {{job.description}}
+        </p>
+
+        <b style="margin:20px;"> Experience</b> :&nbsp;&nbsp; {{job.Experience}} <br>
+        <b style="margin:20px;"> Salary &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b>:&nbsp;&nbsp;
+        {{job.salary}}<br>
+        <b style="margin:20px;"> Posted on</b>&nbsp;&nbsp;&nbsp; :&nbsp;&nbsp; {{job.start_date}}
+        <hr>
+    </div>
+    {%endfor%}
+</div>
+
+
+{%endblock%}

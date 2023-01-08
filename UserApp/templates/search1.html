@@ -1,0 +1,31 @@
+{%extends "homepage.html" %}
+{%block content%}
+
+
+{%for j in job%}
+<a href="jobdetails/{{j.id}}" style="color: black;">
+
+<div class="row" style="background-color:rgb(205, 205, 219); font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;margin-left:200px ;margin-right:200px ;height: auto;padding: 20px;" > 
+   <div class="row"> 
+    <div class="col-sm-10">
+        <b style="font-size: 25px; "> {{j.title}}</b> <br>
+        <b style="font-size: 20px;" >  {{j.company.cname}}</b> <br>
+    </div>
+    <div class="col-sm-2">
+        <img src="{{j.company.image1.url}}"alt="loading" height="80px" width="80px" class="img-circle" style="margin-left: 50px;" > 
+   </div>
+   </div>
+<span class="glyphicon"style="font-size: 17px;margin-top:5px;"   >&#xe033; {{j.Experience}}</span>
+<span class="glyphicon" style="font-size: 17px;"  ><b>&#8377;  </b>{{j.salary}}</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+<span class="glyphicon" style="font-size: 17px;"  >  &#xe062; {{j.company.address1}}  </span> <br>
+
+<p style="font-size: 17px;margin-top: 10px;">  <b><u> Key Skills  </u>: &nbsp; </b> {{j.skills}}<br>
+</p><span class="glyphicon" style="font-size: 17px;"  >&#xe032; &nbsp;{{j.description}}</span><br>
+<br>
+</div> </a>
+
+<br><br>
+{%endfor%}
+
+{%endblock%}

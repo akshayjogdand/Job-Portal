@@ -1,0 +1,83 @@
+{%extends "homepage.html" %}
+{% load static %}
+{%block content%}
+<style>
+    #one {
+        background-color: rgb(226, 220, 220);
+        width: 850px;
+        height: auto;
+        text-align: left;
+        text-justify: distribute;
+        padding: 15px;
+    }
+</style>
+</div>
+<center>
+    <div id="one">
+        <center>
+            <h2> <b> {{user.uname}}</b>&nbsp;
+            </h2> <b> {{user.phone}} </b> <br> <b> {{user.email}} </b> <br>
+            <b> {{user.resume}} </b>
+            <a href="{{user.resume.url}}"> Download </a></p>
+            <script src="{% static 'assets/js/main.js' %}"></script>
+            <br>
+        </center>
+
+
+        <p class="card-text"> <br> <b style="-webkit-text-stroke-width: 0.5px;"> <u> Resume Headline </u> </b> <br></p>
+        <p > &nbsp; &nbsp;&nbsp; &nbsp;{{user.resume_headline}} </p>
+
+        <p class="card-text"> <br> <b style="-webkit-text-stroke-width: 0.5px;"> <u> Education </u> </b>
+       
+        </p>
+        <P > 
+   
+        <table class="table table-hover">
+            <tr>
+                <th> Education </th>
+                <th> Course</th>
+                <th>University</th>
+                <th> Percentage</th>
+                <th> Passing Year</th>
+            </tr>
+            {%for emp in u2%}
+            <tr>
+                <center>
+                    <td> <b> {{emp.education}} </b>
+                    <td> {{emp.course}} </td>
+                    <td> {{emp.marks}}% </td>
+                    <td> {{emp.university}} </td>
+                    <td> {{emp.year}}</td>
+                </center>
+            </tr>
+            {%endfor%}
+        </table></P>
+      
+
+        <p class="card-text"> <b style="-webkit-text-stroke-width: 0.5px;"> <u> Technical Skills </u> </b>
+      
+        </p>
+         <p > &nbsp; &nbsp;&nbsp; &nbsp{{user.key_skills}}</p>
+
+        <p class="card-text"> <br> <b style="-webkit-text-stroke-width: 0.5px;"> <u> Employment </u> </b>
+        </p>
+        <p >&nbsp; &nbsp;&nbsp; &nbsp
+        {%for emp in u1%}
+        <b> {{emp.designation}} &nbsp;<br>&nbsp; &nbsp;&nbsp; &nbsp
+        </b> {{emp.cname}} From
+        {{emp.Join_date}} <br>&nbsp; &nbsp;&nbsp; &nbspNotice Period {{emp.notice_period}} <br>
+        {%endfor%}<br> </p>
+
+
+        <p class="card-text"> <b style="-webkit-text-stroke-width: 0.5px;"> <u> Personal Details </u> </b><br>
+            <p > &nbsp; &nbsp;&nbsp; &nbsp
+            <b> Gender : &nbsp;&nbsp; {{user.gender}} </b><br>
+            <b> &nbsp; &nbsp;&nbsp; &nbsp;Date of Birth : &nbsp;&nbsp; {{user.DOB}}</b><br>
+
+            <b> &nbsp; &nbsp;&nbsp; &nbsp;Permanent Address </b>
+            {{user.address}}</p>
+    </div>
+
+</center>
+<br>
+{%endblock%}

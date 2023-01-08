@@ -1,0 +1,35 @@
+{% extends "rlogin.html" %}
+{%block content%}
+
+
+<div
+  style="margin-top: 20px;margin-bottom: 20px;font-size: 17px;color:rgb(0, 0, 0);background-color: white;width: autopx; margin-left: 250px;margin-right: 250px;padding:15px ;">
+
+  <p style="font-size: 25px;"> {{job.title}}</p>
+  <span class="glyphicon" style="margin-top: 5px;">&#xe139; </span> &nbsp;&nbsp; {{job.Experience}}
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+  <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="currentColor" class="bi bi-wallet2"
+    viewBox="0 0 16 16">
+    <path
+      d="M12.136.326A1.5 1.5 0 0 1 14 1.78V3h.5A1.5 1.5 0 0 1 16 4.5v9a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 0 13.5v-9a1.5 1.5 0 0 1 1.432-1.499L12.136.326zM5.562 3H13V1.78a.5.5 0 0 0-.621-.484L5.562 3zM1.5 4a.5.5 0 0 0-.5.5v9a.5.5 0 0 0 .5.5h13a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5h-13z" />
+  </svg>&nbsp;&nbsp; {{job.salary}}
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+  <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="currentColor" class="bi bi-geo-alt-fill"
+    viewBox="0 0 15 15">
+    <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z" />
+  </svg>&nbsp;&nbsp; {{job.company.address1}}{{job.company.pincode}}
+
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <span class="glyphicon">&#xe033;</span>&nbsp;&nbsp; {{job.company.type.type}}
+
+</div>
+<br><br><center> 
+<div style="background-color:hsla(0, 20%, 86%, 0.505) ;width:500px;"> 
+    <br><br><br>
+<h2 style="font-family: Verdana, Geneva, Tahoma, sans-serif;"> No Response From candidates </h2> 
+<br> <br><br> </div> </center>
+<br><br><br><br><br>
+{%endblock%}
+<br>

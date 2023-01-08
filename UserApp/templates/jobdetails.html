@@ -1,0 +1,233 @@
+{%extends "homepage.html" %}
+{%block content%}
+<style>
+    body {
+        background-color: #f9f9fa
+    }
+    .modal.fade .modal-bottom,
+    .modal.fade .modal-left,
+    .modal.fade .modal-right,
+    .modal.fade .modal-top {
+        position: fixed;
+        z-index: 1055;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        margin: 0;
+        max-width: 100%
+    }
+
+    .btn-warning {
+        color: #fff
+    }
+
+    .btn-warning:hover {
+        color: #fff
+    }
+
+    .modal.fade .modal-right {
+        left: auto !important;
+        transform: translate3d(100%, 0, 0);
+        transition: transform .3s cubic-bezier(.25, .8, .25, 1)
+    }
+
+    .modal.fade.show .modal-bottom,
+    .modal.fade.show .modal-left,
+    .modal.fade.show .modal-right,
+    .modal.fade.show .modal-top {
+        transform: translate3d(0, 0, 0)
+    }
+
+    .w-xl {
+        width: 320px
+    }
+
+    .modal-content,
+    .modal-footer,
+    .modal-header {
+        border: none
+    }
+
+    .h-100 {
+        height: 100% !important
+    }
+
+    .list-group.no-radius .list-group-item {
+        border-radius: 0 !important
+    }
+
+    .btn-light {
+        color: #212529;
+        background-color: #f5f5f6;
+        border-color: #f5f5f6
+    }
+
+    .btn-light:hover {
+        color: #212529;
+        background-color: #e1e1e4;
+        border-color: #dadade
+    }
+
+    .modal-footer {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        padding: 1rem;
+        border-top: 1px solid rgba(160, 175, 185, .15);
+        border-bottom-right-radius: .3rem;
+        border-bottom-left-radius: .3rem
+    }
+
+    .alert {
+        width: 700px;
+        height: 50px;
+    }
+    
+</style>
+
+<script type="text/javascript">
+    $().alert();
+
+    setTimeout(function () { $('.alert').alert('close') }, 4000);
+    function msgsend()
+    {
+       ans =  document.getElementById("first");
+       ans.innerHTML = "You are already applied for this job!!!";
+    }
+
+</script>
+</head>
+{% if messages %}
+{% for message in messages %}
+<center>
+    <div class="alert alert-danger alert-dismissible fade in" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                aria-hidden="true">&times;</span>
+        </button>
+        <center>
+            <h4> <strong> {{message}} </strong> </h4>
+        </center>
+    </div>
+</center>
+{%endfor%}
+{%endif%}
+
+
+<div class="row"
+    style="background-color:blue; font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;margin-left:350px ;margin-right:350px ;height: auto;">
+    <div class="col-sm-1 "> <br>
+        <img src="{{job.company.image1.url}}" alt="loading" height="90px" width="90px" class="img-circle">
+    </div>
+    <h2 style="color:white; margin-left:110px;margin-top: 35px;"> <b> &nbsp;&nbsp; {{job.company.cname}} Pvt Ltd.
+        </b></h2>
+    <div class="col-sm-5" style="color:white;font-size: 15px;">
+        <br>
+        <span class="glyphicon"><b> &nbsp;&nbsp;&nbsp; &#xe062; {{job.company.address1}} </b> </span> <br><br>
+        <span class="glyphicon"> <b> &nbsp;&nbsp;&nbsp; &#xe008; {{job.company.person}} </b> </span>
+    </div><br>
+    <div class="col-sm-5" style="color:white;font-size: 15px;">
+        <span class="glyphicon"> <b>&nbsp;&nbsp;&nbsp; &#x2709; {{job.company.email}} </b> </span> <br><br>
+        <span class="glyphicon"> <b>&nbsp;&nbsp;&nbsp; &#xe182; {{job.company.phone}} </b> </span>
+        <br><br>
+    </div>
+
+</div>
+<div class="row"
+    style="background-color:rgb(205, 205, 219);;font-family:Verdana, Geneva, Tahoma, sans-serif;margin-left:350px ;margin-right:350px ;height: auto;margin-top: 25px;padding: 20px;">
+
+    <p style="font-size: 25px; "> <b> {{job.title}}</b> </p>
+    <p> <b> Job Description : </b> {{job.description}}</p>
+    <p><b> Key Skills &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; : </b>&nbsp; {{job.skills}} </p>
+    <p><b> Salary &nbsp;&nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp; : </b>&nbsp; {{job.salary}} </p>
+    <p><b> Experience &nbsp;&nbsp; &nbsp; &nbsp; : </b> &nbsp; {{job.Experience}} </p>
+    <p><b> Education &nbsp;&nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;: </b>&nbsp; {{job.Education}} </p>
+    <p><b> No of Opening &nbsp; : </b>&nbsp; {{job.no_opening}} </p>
+    <p><b> Posted on &nbsp;&nbsp; &nbsp; &nbsp;&nbsp;&nbsp; : </b> &nbsp; {{job.start_date}} </p>
+    {%if "email" in request.session%}
+    {%if status == "APPLIED"%}
+    <button class="btn btn-primary" type="submit" style="margin-left: 600px;" onclick="msgsend();"> APPLIED
+    </button>
+    <span id="first" style="color: red;"></span>
+    {%else%}
+    <form method="post" action="/apply/{{job.id}}">
+        {% csrf_token %}
+        <button class="btn btn-primary" type="submit" style="margin-left: 600px;"> APPLY
+        </button>
+        </form>
+    {%endif%}
+    {%else%}
+    <div class="page-content page-container" id="page-content">
+        <div class="padding">
+            <div class="row container d-flex justify-content-center">
+                <div class="col-sm-6"> <button class="btn btn-primary" data-toggle="modal" data-target="#modal-left"
+                        style="margin-left: 500px;" data-toggle-class="modal-open-aside"> LOGIN TO APPLY </button>
+                    <div id="modal-left" class="modal fade" data-backdrop="true">
+                        <div class="modal-dialog modal-left w-xl">
+                            <div class="modal-content h-100 no-radius" style="background-color: rgb(227, 235, 235);">
+                                <div class="modal-header">
+                                    <br>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="p-4 text-center">
+                                        <br>
+                                        <button class="close" data-dismiss="modal">&times;</button><br><br><br><br>
+                                        <div style="background-color: #778ca1;"> <br>
+                                            <Center>
+                                                <h3 style="font-family:Georgia, 'Times New Roman', Times, serif"> LOGIN
+                                                </h3>
+                                            </Center>
+                                            <br>
+                                            <form method="post" action="/loginone/{{job.id}}">
+                                                {% csrf_token %}
+                                                <center>
+                                                    <div
+                                                        class="d-flex flex-row align-items-center justify-content-center justify-content-lg-start">
+                                                        <div class="form-outline mb-4">
+                                                            <input type="email" class="form-control form-control-lg"
+                                                                placeholder="Enter a valid email address" name="email"
+                                                                style="width:250px" required />
+                                                        </div>
+                                                        <br>
+                                                        <div class="form-outline mb-4">
+                                                            <input type="password" class="form-control form-control-lg"
+                                                                placeholder="Enter password" name="pwd"
+                                                                style="width:250px" required />
+                                                        </div>
+                                                        <br>
+                                                        <button type="submit" class="btn btn-primary btn-lg"
+                                                            style="padding-left: 2.5rem; padding-right: 2.5rem;">
+                                                            <center> Login </center>
+                                                        </button>
+                                                        <p class="small fw-bold mt-2 pt-1 mb-0"
+                                                            style="font-size: 19px;"> <br>Don't have an account? <a
+                                                                href="/register" class="link-danger"
+                                                                style="color: rgb(230, 181, 19);">Register</a></p>
+
+                                                    </div>
+                                                </center>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {%endif%}
+
+
+
+</div>
+
+
+
+
+
+
+
+<br>
+{%endblock%}
